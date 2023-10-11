@@ -10,16 +10,41 @@
 
 @interface FirstViewController ()
 
+@property (nonatomic, strong) UIProgressView *progressBar;
+
 @end
 
 @implementation FirstViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view, typically from a nib.
     UIImageView * background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:background];
     
+    // Create the progress bar
+    self.progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    self.progressBar.frame = CGRectMake(50, 100, 200, 20);
+    [self.view addSubview:self.progressBar];
+    
+    // Update the progress
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+    PlaygroundView * pv1 = [[PlaygroundView alloc] initWithFrame:CGRectMake(50, 200, 200, 200)];
+    [self.view addSubview:pv1];
+    pv1.backgroundColor = [UIColor whiteColor];
+    [pv1 refreshWithKind:CCKindCandy Number:5];
+}
+
+- (void)updateProgress {
+    static float progress = 0.0;
+    progress += 0.1;
+    
+    if (progress >= 1.0) {
+        progress = 0.0;
+    }
+    
+    [self.progressBar setProgress:progress animated:YES];
 }
 
 
