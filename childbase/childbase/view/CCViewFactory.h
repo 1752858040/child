@@ -9,16 +9,8 @@
 #ifndef CCViewFactory_h
 #define CCViewFactory_h
 
-typedef enum _CCKind{
-    CCKindFish = 0,
-    CCKindThief,
-    CCKindCandy,
-    CCKindPinecone,
-    CCKindGold,
-    CCKindBanana,
-}CCKind;
-
 #import<UIKit/UIKit.h>
+#import "CCKind.h"
 
 @interface CCViewFactory : NSObject
 

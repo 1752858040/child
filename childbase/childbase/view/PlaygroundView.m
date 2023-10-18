@@ -18,6 +18,9 @@
 @implementation PlaygroundView
 
 -(void) refreshWithKind:(CCKind) ckind Number:(NSInteger)number{
+    for (UIImageView * uv in self.ccObjcts) {
+        [self willRemoveSubview:uv];
+    }
     self.ccObjcts = @[].mutableCopy;
     for ( int i = 0 ; i < number ; ++ i) {
         CGPoint randomPos = [self randomPosition];
@@ -33,8 +36,8 @@
 - (CGPoint) randomPosition {
     CGFloat w = self.frame.size.width;
     CGFloat h = self.frame.size.height;
-    CGFloat rw = arc4random() % (NSInteger)w;
-    CGFloat rh = arc4random() % (NSInteger)h;
+    CGFloat rw = (arc4random() % ((NSInteger)w - 50 ) + 50 );
+    CGFloat rh = (arc4random() % ((NSInteger)h - 50 ) + 50 );
     return CGPointMake(rw, rh);
 }
 

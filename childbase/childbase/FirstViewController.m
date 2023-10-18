@@ -7,10 +7,13 @@
 //
 
 #import "FirstViewController.h"
+#import "utils/RandomObjectFactory.h"
+#import "model/CCLevel.h"
 
 @interface FirstViewController ()
 
 @property (nonatomic, strong) UIProgressView *progressBar;
+@property (nonatomic, strong) CCLevel *levelModels;
 
 @end
 
@@ -19,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.levelModels = [RandomObjectFactory buildLevel:1];
+    CCTrial *trial = self.levelModels.trials[0];
     // Do any additional setup after loading the view, typically from a nib.
     UIImageView * background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:background];
@@ -33,7 +38,13 @@
     PlaygroundView * pv1 = [[PlaygroundView alloc] initWithFrame:CGRectMake(50, 200, 200, 200)];
     [self.view addSubview:pv1];
     pv1.backgroundColor = [UIColor whiteColor];
-    [pv1 refreshWithKind:CCKindCandy Number:5];
+    [pv1 refreshWithKind:CCKindCandy Number:trial.leftNums];
+    
+    PlaygroundView * pv2 = [[PlaygroundView alloc] initWithFrame:CGRectMake(500, 200, 200, 200)];
+    [self.view addSubview:pv2];
+    pv2.backgroundColor = [UIColor whiteColor];
+    [pv2 refreshWithKind:CCKindCandy Number:trial.rightNums];
+    
 }
 
 - (void)updateProgress {
